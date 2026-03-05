@@ -31,10 +31,10 @@ void read_file()
       values.push_back(val);
     }
 
-    for (int i = 0; i < volt_res.size(); i++) 
+  /*  for (int i = 0; i < volt_res.size(); i++) 
   {
       cout << volt_res[i] << " " << source[i] << " " << destination[i] << " " << values[i] << endl;
-  }
+  } */
 
 }
 
