@@ -4,9 +4,10 @@
 #include <vector>
 #include <cmath>
 #include <sstream> // for istringstream
+#include "Circuit.h"
 using namespace std;
 
-void read_file()
+void read_file(Circuit* circuit)
 {
     vector<string> volt_res;
     vector<string> source;
@@ -35,12 +36,25 @@ void read_file()
   {
       cout << volt_res[i] << " " << source[i] << " " << destination[i] << " " << values[i] << endl;
   } */
+    circuit->volt_res=volt_res;
+    circuit->source=source;
+    circuit->destination=destination;
+    circuit->values=values;
 
-}
+    // set all counts here
+    circuit->num_branches = volt_res.size();
 
+    int max_node = 0;
+    for (int i = 0; i < circuit->num_branches; i++){
+        max_node = max(max_node, stoi(source[i]));
+        max_node = max(max_node, stoi(destination[i]));
+    }
+    circuit->num_nodes = max_node + 1;
 
-
-int main()
-{
-  read_file();
+    circuit->num_volt = 0;
+    circuit->num_res  = 0;
+    for (int i = 0; i < circuit->num_branches; i++){
+        if (volt_res[i][0] == 'V') circuit->num_volt++;
+        if (volt_res[i][0] == 'R') circuit->num_res++;
+    }
 }

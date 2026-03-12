@@ -1,14 +1,15 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "Circuit.h"
 
 using namespace std;
 
-void incidence(){
-    vector<string> volt_res;
-    vector<string> source={"1","1","2"};
-    vector<string> destination={"0", "2", "0"};
-    vector<double> values;
+void incidence(Circuit* circuit){
+    vector<string> volt_res=circuit->volt_res;
+    vector<string> source=circuit->source;
+    vector<string> destination=circuit->destination;
+    vector<double> values=circuit->values;
 
     int source_int;
     int destination_int;
@@ -22,14 +23,13 @@ void incidence(){
         A[destination_int][i]=-1;
     }
 
-    for (int i=0; i<size; i++){
+    A.erase(A.begin()); //removes ground node
+
+    /*for (int i=0; i<size; i++){
         for (int j=0; j<size; j++){
             cout<<A[i][j]<<' ';
         }
         cout<<endl;
-    }
-}
-
-int main(){
-    incidence();
+    } */
+   circuit->A=A;
 }
